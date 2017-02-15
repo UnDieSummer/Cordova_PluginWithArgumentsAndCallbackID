@@ -15,7 +15,7 @@
                 font-size: 16px;
                 margin: 4px;
                 padding: 4px;
-                width: 180px;
+                width: 280px;
                 height: 32px;
             }
             </style>
@@ -41,6 +41,22 @@
                     }
                     cordova.exec(null, null, "TestPluginName", "testPluginFunction", null);
                 };
+            
+                JSObject.testCordovaPluginWithArgumentsAndCallBack = function() {
+                    console.log("testJS");
+                    
+                    if (!this.IsMobile() || !this.SupportCovdova()) {
+                        alert("不支持Cordova");
+                        return;
+                    }
+                    cordova.exec(this.testSuccess, this.testFail, "TestPluginName", "testPluginFunctionWithArgumentsAndCallBack", [{"name" : "小明"}, {"age" : "9"}, {"frends" : ["小白", "小溪"]}]);
+                };
+                JSObject.testSuccess = function(result) {
+                    alert("JS成功回调方法：testSuccess\n\n"+result);
+                }
+                JSObject.testFail = function(result) {
+                    alert("JS失败回调方法：testFail\n\n"+result);
+                }
             </script>
             
             </head>
@@ -48,6 +64,9 @@
         <div class="ui-margin"></div>
         <div>
             <input class="ui-block-a" type="button" value="调用插件" onclick="JSObject.testCordovaPlugin()" />
+        </div>
+        <div>
+            <input class="ui-block-a" type="button" value="调用插件,带参数和回调" onclick="JSObject.testCordovaPluginWithArgumentsAndCallBack()" />
         </div>
     </body>
 </html>

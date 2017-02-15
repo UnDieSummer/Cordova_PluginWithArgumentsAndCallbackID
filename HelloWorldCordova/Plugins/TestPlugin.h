@@ -10,4 +10,6 @@
 
 @interface TestPlugin : CDVPlugin
 -(void)testPluginFunction:(CDVInvokedUrlCommand *)command;
+//参数传递 和回调
+-(void)testPluginFunctionWithArgumentsAndCallBack:(CDVInvokedUrlCommand *)command;
 @end
